@@ -1,0 +1,139 @@
+#include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+
+using namespace std;
+
+class fraccion{
+private:
+ int num;
+ int den;
+
+public:
+ fraccion() {
+   num=1;
+   den=1;
+ }
+
+ void setNum(int n)
+ { num=n; }
+ 
+ void setDen(int d)
+ { den=d; }
+
+ int getNum()
+ { return num; }
+
+ int getDen()
+ { return den; }
+
+void leer()
+{
+  int a,b;
+  
+  cout<<"Num:"; cin>>a; 
+  cout<<"Den:"; cin>>b;
+  num=a;
+  den=b;
+}
+
+void mostrar()
+{
+  cout<<num<<"/"<<den<<endl;
+}
+
+ void simplificar(){
+ int c=2;
+  while(c<=num && c<=den)
+  {
+	 if(num % c==0 && den % c==0){
+	   num=num / c;
+	   den=den / c;
+	 }
+	 else
+		c++;
+  }
+ }
+
+ void suma(fraccion f1, fraccion f2);
+ void suma2(fraccion f1, fraccion f2);
+ void multiplicacion(fraccion f1, fraccion f2);
+ void division(fraccion f1, fraccion f2);
+ 
+
+}; //fin clase
+
+void fraccion::suma(fraccion f1, fraccion f2) //fuera de la clase
+ {
+	int n1=f1.getNum();
+	int n2=f2.getNum();
+	int d1=f1.getDen();
+	int d2=f2.getDen();
+	den=d1*d2;
+	num=(den/d1)*n1+(den/d2)*n2;
+	simplificar();
+}
+
+void fraccion:: multiplicacion(fraccion f1, fraccion f2)
+{
+	int n1=f1.getNum();
+	int n2=f2.getNum();
+	int d1=f1.getDen();
+	int d2=f2.getDen();
+	den=d1*d2;
+	num=n1*n2;
+}
+
+void fraccion::division(fraccion f1, fraccion f2)
+{
+	int n1=f1.getNum();
+	int n2=f2.getNum();
+	int d1=f1.getDen();
+	int d2=f2.getDen();
+	den=d1*d2;
+	num=n1*n2;
+}
+
+// metodos que no son de la clase fraccion
+int mcd(int a, int b)
+{
+	int aux;
+	while(b>0)
+	{
+		aux=b;
+		b=a % b;
+		a=aux;
+	}
+	return a;
+}
+
+int mcm (int a, int b)
+{
+	return (a*b)/ mcd(a,b);
+}
+
+void suma2 (fraccion f1, fraccion f2)
+{
+	int n1=f1.getNum();
+	int n2=f2.getNum();
+	int d1=f1.getDen();
+	int d2=f2.getDen();
+	den=mcm(d1*d2);
+	num=(den/d1)*n1+(den/d2)*n2;
+	simplificar();
+}
+
+
+
+void main()
+{
+	fraccion f1,f2,f3;
+	f1.leer();
+	f2.leer();
+	f3.suma(f1,f2);
+	f1.mostrar();
+	f1.simplificar();
+	f1.mostrar();
+	
+	getche();
+}

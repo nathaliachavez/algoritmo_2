@@ -1,0 +1,110 @@
+#include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+
+using namespace std;
+
+const int diaMes[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+class fecha{
+private:
+ int dia;
+ int mes;
+ int anho;
+
+public:
+ fecha() {
+   dia=mes=anho=0;   
+ }
+
+ void setDia(int d)
+ { dia=d; }
+ 
+ int getDia()
+ { return dia; }
+
+ void setMes(int m)
+ { mes=m; }
+ 
+ int getMes()
+ { return mes; }
+
+ void setAnho(int a)
+ { anho=a; }
+ 
+ int getAnho()
+ { return anho; }
+ void leer()
+{	
+	cout<<"dia:";
+    cin>>dia;
+	
+	cout<<"mes:";
+    cin>>mes;
+	
+	cout<<"anho:";
+    cin>>anho;
+	
+	
+}  
+ void mostrar()
+ { cout<<dia<<"/"<<mes<<"/"<<anho;
+ }
+ 
+ bool validar()
+ {
+    if(dia>diaMes[mes]||mes>12||anho<=0)
+		return false;
+	else 
+		return true;
+ }
+
+ void manhana();
+ void menor(fecha f1);
+
+};//fin clase
+
+void fecha::manhana()
+{
+	if((dia+1)>diaMes[mes])
+	{
+	    dia=1;
+		if ((mes+1)>12)
+		{
+			mes=1;
+			anho=anho+1;
+		}
+		else 
+			mes=mes+1;
+	}
+	else 
+		dia=dia+1;
+}
+
+void fecha::menor(fecha f1)
+{
+	if(getAnho()<=f1.getAnho() && getMes()<=f1.getMes()&& getDia()<=f1.getDia())
+		mostrar();
+	else
+	{
+		f1.mostrar();
+	}
+}
+
+void main()
+{
+	fecha f1,f2;
+	f1.leer();
+	f2.leer();
+	f2.menor(f1);
+	//f1.mostrar();
+	//if(f1.validar())
+	//cout<<"fecha valida:";
+	//else
+	//cout<<"fecha incorrecta:";
+	//f1.manhana();
+
+	getche();
+}
+
+
+ 
